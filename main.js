@@ -165,6 +165,34 @@ function createApplicationMenu() {
           }
         }
       ]
+    },  // 添加逗号
+    
+    // 添加视图菜单
+    {
+      label: '视图',
+      submenu: [
+        {
+          label: '编辑/预览 分栏模式',
+          accelerator: 'CmdOrCtrl+1',
+          click: () => {
+            mainWindow.webContents.send('set-view-mode', 'split');
+          }
+        },
+        {
+          label: '编辑模式',
+          accelerator: 'CmdOrCtrl+2',
+          click: () => {
+            mainWindow.webContents.send('set-view-mode', 'editor');
+          }
+        },
+        {
+          label: '预览模式',
+          accelerator: 'CmdOrCtrl+3',
+          click: () => {
+            mainWindow.webContents.send('set-view-mode', 'preview');
+          }
+        }
+      ]
     }
   ];
   

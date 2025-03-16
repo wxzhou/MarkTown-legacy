@@ -223,3 +223,17 @@
   user-select: none;
   -webkit-user-select: none;
 }
+
+
+/* 内容容器样式 */
+.content-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.editor-container, .preview-container {
+  overflow: auto;
+  height: 100%;
+  transition: width 0.3s ease; /* 添加过渡效果 */
+}

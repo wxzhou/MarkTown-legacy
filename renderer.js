@@ -523,6 +523,50 @@ window.onload = function() {
   // 初始化第一个标签
   createNewTab();
   
+  // 添加视图模式变量
+  let currentViewMode = 'split'; // 默认为分栏模式
+  
+  // 设置视图模式函数
+  function setViewMode(mode) {
+    const editorContainer = document.querySelector('.editor-container');
+    const previewContainer = document.querySelector('.preview-container');
+    const resizer = document.querySelector('.resizer');
+    
+    currentViewMode = mode;
+    
+    switch (mode) {
+      case 'split': // 分栏模式
+        editorContainer.style.display = 'block';
+        previewContainer.style.display = 'block';
+        resizer.style.display = 'block';
+        editorContainer.style.width = '50%';
+        previewContainer.style.width = '50%';
+        break;
+        
+      case 'editor': // 仅编辑模式
+        editorContainer.style.display = 'block';
+        previewContainer.style.display = 'none';
+        resizer.style.display = 'none';
+        editorContainer.style.width = '100%';
+        break;
+        
+      case 'preview': // 仅预览模式
+        editorContainer.style.display = 'none';
+        previewContainer.style.display = 'block';
+        resizer.style.display = 'none';
+        previewContainer.style.width = '100%';
+        break;
+    }
+    
+    // 如果有活动编辑器，触发一次内容更新以确保预览正确显示
+    if (activeTabIndex >= 0 && activeTabIndex < editors.length) {
+      const currentEditor = editors[activeTabIndex];
+      if (currentEditor && currentEditor.editor) {
+        renderMarkdown(currentEditor.editor);
+      }
+    }
+  }
+  
   // 设置初始宽度
   const editorContainer = document.querySelector('.editor-container');
   const previewContainer = document.querySelector('.preview-container');
@@ -570,6 +614,12 @@ window.onload = function() {
     });
   }
   
+  // 监听视图模式切换事件
+  window.electronAPI.onSetViewMode((mode) => {
+    console.log('收到视图模式切换事件:', mode);
+    setViewMode(mode);
+  });
+  
   // 监听主题设置事件
   window.electronAPI.onSetTheme((theme) => {
     console.log('收到主题设置事件:', theme);
@@ -608,4 +658,7 @@ window.onload = function() {
     .catch(err => {
       console.error('加载主题出错:', err);
     });
+  
+  // 初始化为分栏模式
+  setViewMode('split');
 };
