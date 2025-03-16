@@ -541,6 +541,10 @@ window.onload = function() {
         resizer.style.display = 'block';
         editorContainer.style.width = '50%';
         previewContainer.style.width = '50%';
+        
+        // 确保在切换到分栏模式时重置一些样式
+        editorContainer.style.flex = '0 0 auto';
+        previewContainer.style.flex = '1 0 auto';
         break;
         
       case 'editor': // 仅编辑模式
@@ -579,9 +583,13 @@ window.onload = function() {
   const resizer = document.querySelector('.resizer');
   if (resizer) {
     let isResizing = false;
+    let startX = 0;
+    let startEditorWidth = 0;
     
     resizer.addEventListener('mousedown', (e) => {
       isResizing = true;
+      startX = e.clientX;
+      startEditorWidth = editorContainer.offsetWidth;
       document.body.style.cursor = 'col-resize';
       resizer.classList.add('active');
       
@@ -593,15 +601,23 @@ window.onload = function() {
     document.addEventListener('mousemove', (e) => {
       if (!isResizing) return;
       
-      // 计算编辑器容器的宽度百分比
-      const containerWidth = editorContainer.parentElement.clientWidth;
-      const newWidth = (e.clientX / containerWidth) * 100;
+      // 计算移动距离
+      const dx = e.clientX - startX;
       
-      // 限制拖动范围，确保两个区域都有合理的宽度
-      if (newWidth >= 20 && newWidth <= 80) {
-        editorContainer.style.width = `${newWidth}%`;
-        previewContainer.style.width = `${100 - newWidth}%`;
+      // 使用绝对像素值而不是百分比，减少计算延迟
+      const newWidth = startEditorWidth + dx;
+      const containerWidth = editorContainer.parentElement.clientWidth;
+      
+      // 限制拖动范围
+      if (newWidth >= containerWidth * 0.2 && newWidth <= containerWidth * 0.8) {
+        // 直接设置像素值，减少计算和渲染延迟
+        editorContainer.style.width = `${newWidth}px`;
+        previewContainer.style.width = `${containerWidth - newWidth - resizer.offsetWidth}px`;
       }
+      
+      // 阻止事件传播
+      e.preventDefault();
+      e.stopPropagation();
     });
     
     document.addEventListener('mouseup', () => {
@@ -610,6 +626,14 @@ window.onload = function() {
         document.body.style.cursor = '';
         resizer.classList.remove('active');
         document.body.classList.remove('no-select');
+        
+        // 拖动结束后，将宽度转换回百分比
+        const containerWidth = editorContainer.parentElement.clientWidth;
+        const editorWidth = editorContainer.offsetWidth;
+        const editorPercent = (editorWidth / containerWidth) * 100;
+        
+        editorContainer.style.width = `${editorPercent}%`;
+        previewContainer.style.width = `${100 - editorPercent}%`;
       }
     });
   }
