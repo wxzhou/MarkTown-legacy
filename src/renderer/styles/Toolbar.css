@@ -4,6 +4,7 @@
   padding: 8px 12px;
   background-color: var(--toolbar-bg);
   border-bottom: 1px solid var(--border-color);
+  min-height: 50px; /* 确保工具栏有足够的高度 */
 }
 
 .toolbar-button {
@@ -18,6 +19,7 @@
   border-radius: 4px;
   color: var(--text-color);
   cursor: pointer;
+  font-size: 16px; /* 增加图标大小 */
 }
 
 .toolbar-button:hover {

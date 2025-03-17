@@ -118,6 +118,7 @@ function createMenu() {
       ]
     },
     {
+      // 在视图菜单中修改显示边栏选项
       label: '视图',
       submenu: [
         { 
@@ -146,7 +147,10 @@ function createMenu() {
           label: '显示边栏', 
           type: 'checkbox',
           checked: true,
-          click: (menuItem) => mainWindow.webContents.send('view-sidebar', menuItem.checked) 
+          click: (menuItem) => {
+            console.log('菜单项点击，显示边栏:', menuItem.checked);
+            mainWindow.webContents.send('view-sidebar', menuItem.checked);
+          }
         }
       ]
     },

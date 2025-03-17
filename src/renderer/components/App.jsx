@@ -9,7 +9,7 @@ import '../styles/App.css';
 
 const App = () => {
   // 状态管理
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(true); // 默认显示边栏
   const [viewMode, setViewMode] = useState('split'); // split, edit, read, immersive
   const [theme, setTheme] = useState('github-light');
   const [tabs, setTabs] = useState([{ id: 1, title: '未命名.md', content: '', active: true }]);
@@ -21,7 +21,12 @@ const App = () => {
     ipcRenderer.on('view-edit', () => setViewMode('edit'));
     ipcRenderer.on('view-read', () => setViewMode('read'));
     ipcRenderer.on('view-immersive', () => setViewMode('immersive'));
-    ipcRenderer.on('view-sidebar', (_, checked) => setShowSidebar(checked));
+    
+    // 边栏显示/隐藏事件
+    ipcRenderer.on('view-sidebar', (_, checked) => {
+      console.log('收到边栏显示状态变更:', checked);
+      setShowSidebar(checked);
+    });
 
     // 主题相关事件
     ipcRenderer.on('theme-github-light', () => setTheme('github-light'));
@@ -93,11 +98,16 @@ const App = () => {
   // 获取当前活动标签页
   const activeTab = tabs.find(tab => tab.active) || tabs[0];
 
+  // 添加调试信息
+  console.log('当前边栏显示状态:', showSidebar);
+
   return (
     <div className={`app-container ${theme}`}>
       <div className="main-layout">
+        {/* 确保边栏显示 */}
         {showSidebar && <Sidebar />}
         <div className="workspace">
+          {/* 确保工具栏显示 */}
           <Toolbar />
           <TabBar 
             tabs={tabs} 

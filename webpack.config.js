@@ -33,5 +33,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  target: 'electron-renderer'
+  target: 'electron-renderer',
+  // 添加开发模式配置
+  mode: 'development',
+  devtool: 'source-map'
 };

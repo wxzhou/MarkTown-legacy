@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #24292e;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+/* 确保所有元素都有可见的边界 */
+.sidebar, .toolbar, .tab-bar, .editor, .preview {
+  border: 1px solid #ddd;
+}
+
+/* 添加一些调试样式，帮助我们看到组件 */
+.sidebar {
+  background-color: #f0f2f5;
+}
+
+.toolbar {
+  background-color: #f6f8fa;
+  min-height: 40px;
+}

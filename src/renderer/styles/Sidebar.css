@@ -1,6 +1,18 @@
 .sidebar {
   width: 250px;
+  min-width: 250px; /* 确保边栏不会被压缩 */
   background-color: var(--sidebar-bg);
   border-right: 1px solid var(--border-color);
   overflow-y: auto;
+  color: var(--text-color);
+}
+
+.sidebar-header {
+  padding: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-content {
+  padding: 16px;
 }
