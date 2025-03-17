@@ -21,14 +21,23 @@
   background-color: var(--bg-color);
 }
 
+/* 修改沉浸模式样式 */
+.content-area.immersive {
+  /* 移除分栏模式的样式影响 */
+  border-right: none;
+}
+
+.content-area.immersive .editor {
+  /* 确保沉浸模式下编辑器占满整个内容区 */
+  flex: 1;
+  border-right: none;
+}
+
 .editor.immersive {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 100;
+  /* 修改定位方式，避免与其他元素重叠 */
+  position: relative;
   background-color: var(--bg-color);
+  z-index: 10;
 }
 
 .editor.immersive textarea {

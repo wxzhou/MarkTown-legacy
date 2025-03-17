@@ -78,10 +78,36 @@
   flex: 1;
 }
 
+/* 修改沉浸模式样式 */
+.content-area.immersive {
+  display: flex;
+  /* 确保没有分割线 */
+  border-right: none;
+}
+
 .content-area.immersive .editor {
   flex: 1;
+  /* 移除边框 */
+  border-right: none;
 }
 
 .content-area.immersive .preview {
   display: none;
+}
+
+/* 沉浸模式容器样式 */
+.workspace.immersive-container {
+  position: relative;
+}
+
+/* 确保沉浸模式下没有多余的元素显示 */
+.workspace.immersive-container .toolbar,
+.workspace.immersive-container .tab-bar {
+  display: none;
+}
+
+/* 确保沉浸模式下内容区域正确显示 */
+.content-area.immersive {
+  position: relative;
+  z-index: 10;
 }

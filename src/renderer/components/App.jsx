@@ -104,17 +104,19 @@ const App = () => {
   return (
     <div className={`app-container ${theme}`}>
       <div className="main-layout">
-        {/* 确保边栏显示 */}
+        {/* 确保边栏显示只取决于showSidebar状态 */}
         {showSidebar && <Sidebar />}
-        <div className="workspace">
-          {/* 确保工具栏显示 */}
-          <Toolbar />
-          <TabBar 
-            tabs={tabs} 
-            onTabClick={switchTab} 
-            onTabClose={closeTab} 
-            onAddTab={addTab} 
-          />
+        <div className={`workspace ${viewMode === 'immersive' ? 'immersive-container' : ''}`}>
+          {/* 在沉浸模式下隐藏工具栏和标签栏 */}
+          {viewMode !== 'immersive' && <Toolbar />}
+          {viewMode !== 'immersive' && (
+            <TabBar 
+              tabs={tabs} 
+              onTabClick={switchTab} 
+              onTabClose={closeTab} 
+              onAddTab={addTab} 
+            />
+          )}
           <div className={`content-area ${viewMode}`}>
             {(viewMode === 'split' || viewMode === 'edit' || viewMode === 'immersive') && (
               <Editor 
