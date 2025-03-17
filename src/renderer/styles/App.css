@@ -1,0 +1,87 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.app-container.github-light {
+  --bg-color: #ffffff;
+  --text-color: #24292e;
+  --border-color: #e1e4e8;
+  --active-bg: #f6f8fa;
+  --hover-bg: #f1f2f3;
+  --sidebar-bg: #f6f8fa;
+  --toolbar-bg: #f6f8fa;
+  --tab-bg: #f6f8fa;
+  --tab-active-bg: #ffffff;
+}
+
+.app-container.github-dark {
+  --bg-color: #0d1117;
+  --text-color: #c9d1d9;
+  --border-color: #30363d;
+  --active-bg: #161b22;
+  --hover-bg: #1f2428;
+  --sidebar-bg: #161b22;
+  --toolbar-bg: #161b22;
+  --tab-bg: #161b22;
+  --tab-active-bg: #0d1117;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.workspace {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.content-area {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  border-top: 1px solid var(--border-color);
+}
+
+.content-area.split {
+  display: flex;
+}
+
+.content-area.split .editor {
+  flex: 1;
+  border-right: 1px solid var(--border-color);
+}
+
+.content-area.split .preview {
+  flex: 1;
+}
+
+.content-area.edit .editor {
+  flex: 1;
+}
+
+.content-area.edit .preview {
+  display: none;
+}
+
+.content-area.read .editor {
+  display: none;
+}
+
+.content-area.read .preview {
+  flex: 1;
+}
+
+.content-area.immersive .editor {
+  flex: 1;
+}
+
+.content-area.immersive .preview {
+  display: none;
+}
