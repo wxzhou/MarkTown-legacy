@@ -104,10 +104,8 @@ const App = () => {
   return (
     <div className={`app-container ${theme}`}>
       <div className="main-layout">
-        {/* 确保边栏显示只取决于showSidebar状态 */}
         {showSidebar && <Sidebar />}
         <div className={`workspace ${viewMode === 'immersive' ? 'immersive-container' : ''}`}>
-          {/* 在沉浸模式下隐藏工具栏和标签栏 */}
           {viewMode !== 'immersive' && <Toolbar />}
           {viewMode !== 'immersive' && (
             <TabBar 
