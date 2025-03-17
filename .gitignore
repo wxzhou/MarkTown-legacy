@@ -1,3 +1,6 @@
+# Other
+*.ai
+
 # Logs
 logs
 *.log
