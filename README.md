@@ -4,7 +4,7 @@ This repository contains an early prototype of a WYSIWYG Markdown editor built f
 
 ⚠️ This project is no longer actively developed.
 
-A new version of MarkTown is being rebuilt in a separate repository.
+👉 A new version of MarkTown is being rebuilt in a separate repository: https://github.com/wxzhou/MarkTown
 
 Status: legacy prototype, kept for reference.
 
